@@ -1,0 +1,388 @@
+<apex:page readOnly="true"   
+           applyHtmlTag="false"    
+           sidebar="false"    
+           showHeader="false"    
+           cache="true"    
+           renderAs="advanced_pdf"
+           docType="html-5.0"
+           standardStylesheets="false">
+    
+    <html>
+        
+        <head>   
+            
+            <meta http-equiv="Content-Type" 
+                  content="text/html; charset=UTF-8" />  
+            
+            <style type="text/css">
+                
+                @page {
+                size: A4;
+                font-family: Arial Unicode MS;
+                
+                @top-center {
+                content: element(header);
+                }
+                
+                @bottom-center {
+                content: element(footer);
+                }
+                }
+                
+                div.header {
+                position: running(header);
+                width: 100%;
+                border: 1px solid #000000;
+                }
+                
+                div.footer {
+                position: running(footer);
+                width: 100%;
+                }
+                
+                .pagenumber:before {
+                content: counter(page);
+                }
+                
+                .pagecount:before {
+                content: counter(pages);
+                }
+                
+                body {
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                }
+                
+                .div_align_center {
+                display: block;
+                margin: auto !important;
+                padding: auto !important;
+                }
+                
+                .text_align_left {
+                text-align: left !important;
+                }
+                
+                .text_align_center {
+                text-align: center !important;
+                }
+                
+                .text_align_right {
+                text-align: right !important;
+                }
+                
+                .text_align_justify {
+                text-align: justify !important;
+                }
+                
+                .float_left {
+                float: left;
+                }
+                
+                .float_right {
+                float: right;
+                }
+                
+                .display_inline_block {
+                display: inline-block;
+                }
+                
+                .page_break_after_always {
+                page-break-after:always;
+                }
+                
+                .page_break_after_avoid {
+                page-break-after: avoid;
+                }
+                
+                table {
+                width: 100%;
+                /* font-size: 14px; */
+                background-color: #ffffff;
+                border: 1px solid #000000;
+                border-collapse: collapse;
+                margin-top: 0;
+                padding-top: 0;
+                margin-bottom: 0;
+                padding-bottom: 0;
+                }
+                
+                table th {
+                text-align: center; 
+                /* line-height: 15px; */
+                margin: 0;
+                padding: 5px;
+                border: 1px solid #000000;
+                /* font-weight: bold; */
+                background-color: #e1e3e6; 
+                }
+                
+                table td {
+                text-align: left; 
+                /* line-height: 15px; */
+                margin: 0;
+                padding: 5px;
+                border: 1px solid #000000;
+                }
+                
+                table tr, table td {
+                page-break-inside: avoid;
+                word-wrap: break-word;
+                }
+                
+                .width_10 {
+                width: 10%;
+                }
+                
+                .width_20 {
+                width: 20%;
+                }
+                
+                .width_30 {
+                width: 30%;
+                }
+                
+                .width_40 {
+                width: 40%;
+                }
+                
+                .width_49 {
+                width: 49%;
+                }
+                
+                .width_50 {
+                width: 50%;
+                }
+                
+                .width_60 {
+                width: 60%;
+                }
+                
+                .width_70 {
+                width: 70%;
+                }
+                
+                .width_80 {
+                width: 80%;
+                }
+                
+                .width_90 {
+                width: 90%;
+                }
+                
+                .width_100 {
+                width: 100%;
+                }
+                
+                .padding_top_10px {
+                padding-top: 10px;
+                }
+                
+                .padding_top_20px {
+                padding-top: 20px;
+                }
+                
+                .border_0 {
+                border: 0 !important;
+                }
+                
+                .border_width_1px {
+                border-width: 1px;
+                }
+                
+                .border_style_solid {
+                border-style: solid;
+                }
+                
+                .border_color_000000 {
+                border-color: #000000;
+                }
+                
+                .border_1px_solid_black {
+                border: 1px solid black;
+                }
+                
+            </style>
+            
+        </head>
+        
+        <body>
+            
+            <div class="width_100 float_left">    
+                <div class="width_100">
+                    
+                    <table>
+                        <tr>
+                            <th width="100%">
+                                Test
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                Test
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+            </div>
+            
+            <div class="width_100 float_left padding_top_20px">
+            </div>
+            
+            <div class="width_100 float_left">    
+                <div class="width_100">
+                    
+                    <div class="width_49 float_left">    
+                        <div class="width_100">
+                            
+                            <table>
+                                <tr>
+                                    <th width="100%">
+                                        Test
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Test
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="width_49 float_right">    
+                        <div class="width_100">
+                            
+                            <table>
+                                <tr>
+                                    <th width="100%">
+                                        Test
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Test
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="width_100 float_left padding_top_20px">
+            </div>
+            
+            <div class="width_100 float_left">    
+                <div class="width_100">
+                    
+                    <table>
+                        <tr>
+                            <th width="50%">
+                                Test
+                            </th>
+                            <th width="50%">
+                                Test
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                Test
+                            </td>
+                            <td>
+                                Test
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+            </div>
+            
+            <div class="width_100 float_left">    
+                <div class="width_100">
+                    
+                    <p class="page_break_after_always">
+                    </p>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="width_100 float_left">    
+                <div class="width_100">
+                    
+                    <table>
+                        <tr>
+                            <th width="100%">
+                                Test
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                Test
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+            </div>
+            
+            <div class="width_100 float_left padding_top_20px">
+            </div>
+            
+            <div class="width_100 float_left">    
+                <div class="width_100">
+                    
+                    <div class="width_60 div_align_center">    
+                        <div class="width_100">
+                            
+                            <table>
+                                <tr>
+                                    <th width="100%">
+                                        Test
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Test
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="width_100 float_left padding_top_20px">
+            </div>
+            
+            <div class="width_100 float_left">    
+                <div class="width_100">
+                    
+                    <table>
+                        <tr>
+                            <th width="100%" class="border_0">
+                                Test
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="border_0">
+                                Test
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+            </div>
+            
+        </body>
+        
+    </html>
+    
+</apex:page>

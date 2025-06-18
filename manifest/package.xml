@@ -16,6 +16,10 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>VfPageRenderAsPdf</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
         <members>ErrorLogsNotification_Emails</members>
         <name>CustomLabel</name>
     </types>
