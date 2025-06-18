@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <style>
+         table {
+         font-family: arial, sans-serif;
+         border-collapse: collapse;
+         width: 100%;
+         }
+         td, th {
+         border: 1px solid #dddddd;
+         text-align: left;
+         padding: 8px;
+         }
+         th {
+         background-color: #dddddd;
+         }
+      </style>
+   </head>
+   <body>
+      <p> 
+         Hey,
+      </p>
+      <p>
+         We are reaching out to inform you that errors have been detected in the Apex code and/or Flow processes within your Salesforce environment. Below, you will find the relevant details about the encountered issues:
+      </p>
+      <p> 
+         <b>Org Name:</b> ORGNAME
+         <br/>
+         <b>Org Id:</b> ORGID
+      </p>
+      ERRORSDETAILS
+      <br/>
+      <br/>
+      <p> 
+         Thanks.
+      </p>
+   </body>
+</html>
