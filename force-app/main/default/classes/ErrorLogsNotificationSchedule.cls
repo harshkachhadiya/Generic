@@ -16,7 +16,6 @@ public with sharing class ErrorLogsNotificationSchedule implements Schedulable {
                         FROM LogEntry__c
                         WHERE OriginType__c = 'Apex'
                         AND LoggingLevel__c = 'ERROR'
-                        AND OriginType__c = 'Apex'
                         GROUP BY ApexClassName__c];
             
         } else {
