@@ -9,8 +9,8 @@ public with sharing class ErrorLogsNotificationScheduleTest {
         
         LogEntry__c logEntry = new LogEntry__c();
         logEntry.Log__c = log.Id;
-        logEntry.LoggingLevel__c = 'ERROR';
         logEntry.OriginType__c = 'Apex';
+        logEntry.LoggingLevel__c = 'ERROR';
         insert logEntry;
         
         Test.startTest();
