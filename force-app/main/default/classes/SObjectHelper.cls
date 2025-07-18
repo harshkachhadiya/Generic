@@ -1,4 +1,9 @@
 public without sharing class SObjectHelper {
+
+    @AuraEnabled
+    public static Boolean isSandbox() {
+        return System.URL.getOrgDomainUrl().toExternalForm().contains('sandbox');
+    }
     
     @AuraEnabled
     public static String getSObjectApiNameById(Id recordId) {

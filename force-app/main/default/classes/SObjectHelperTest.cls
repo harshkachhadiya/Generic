@@ -1,5 +1,17 @@
 @IsTest
 public with sharing class SObjectHelperTest {
+
+    @IsTest
+    static void isSandboxTest() {
+        
+        Test.startTest();
+        
+        Boolean isSandbox = SObjectHelper.isSandbox();
+        
+        System.assertEquals(System.URL.getOrgDomainUrl().toExternalForm().contains('sandbox') == isSandbox);
+        
+        Test.stopTest();
+    }
     
     @IsTest
     static void getSObjectApiNameByIdTest() {
