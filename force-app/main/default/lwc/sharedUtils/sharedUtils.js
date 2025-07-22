@@ -1,4 +1,33 @@
+import { loadScript, loadStyle } from 'lightning/platformResourceLoader';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
+const loadStyles = (context, styles = []) => {
+
+    if (!styles.length) {
+        return;
+    }
+
+    const promises = styles.map((style) => loadStyle(context, style));
+
+    Promise.all(promises)
+        .catch((error) => {
+            dispatchToastError(error);
+        });
+}
+
+const loadScripts = (context, scripts = []) => {
+
+    if (!scripts.length) {
+        return;
+    }
+
+    const promises = scripts.map((script) => loadScript(context, script));
+
+    Promise.all(promises)
+        .catch((error) => {
+            dispatchToastError(error);
+        });
+}
 
 // Reduce Errors
 const reduceErrors = (errors) => {
@@ -167,7 +196,42 @@ const dateAddMonths = (date, noOfMonths = 0) => {
     return '';
 }
 
+const downloadExcelWithSheets = (tabs = [], filename = 'export.xlsx') => {
+
+    if (!tabs.length) {
+        return;
+    }
+
+    const workbook = XLSX.utils.book_new();
+
+    tabs.forEach(tab => {
+        const { sheetName, headers, records } = tab;
+
+        if (!sheetName || !headers?.length || !records?.length) {
+            return;
+        }
+
+        const formattedRecords = records.map(record => {
+            const row = {};
+
+            headers.forEach(header => {
+                row[header] = record[header] ?? '';
+            });
+
+            return row;
+        });
+
+        const sheet = XLSX.utils.json_to_sheet(formattedRecords, { header: headers });
+
+        XLSX.utils.book_append_sheet(workbook, sheet, sheetName);
+    });
+
+    XLSX.writeFile(workbook, filename);
+}
+
 export {
+    loadStyles,
+    loadScripts,
     reduceErrors,
     joinErrors,
     dispatchToastEvent,
@@ -181,5 +245,6 @@ export {
     formatDateToMMDDYYYY,
     formatDateToYYYYMMDD,
     dateAddDays,
-    dateAddMonths
+    dateAddMonths,
+    downloadExcelWithSheets
 }

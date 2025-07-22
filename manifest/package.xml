@@ -31,5 +31,9 @@
         <members>sharedUtils</members>
         <name>LightningComponentBundle</name>
     </types>
+    <types>
+        <members>XLSX</members>
+        <name>StaticResource</name>
+    </types>
     <version>63.0</version>
 </Package>
