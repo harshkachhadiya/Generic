@@ -8,8 +8,8 @@
         <members>QueueableHelper</members>
         <members>QueueableHelperTest</members>
         <members>QueueableUtility</members>
-        <members>SObjectHelper</members>
-        <members>SObjectHelperTest</members>
+        <members>SObjectUtil</members>
+        <members>SObjectUtilTest</members>
         <members>TestMockCallouts</members>
         <members>TriggerHandler</members>
         <members>TriggerHandlerTest</members>

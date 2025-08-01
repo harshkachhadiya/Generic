@@ -1,12 +1,12 @@
 @IsTest
-public with sharing class SObjectHelperTest {
+public with sharing class SObjectUtilTest {
 
     @IsTest
     static void isSandboxTest() {
         
         Test.startTest();
         
-        Boolean isSandbox = SObjectHelper.isSandbox();
+        Boolean isSandbox = SObjectUtil.isSandbox();
         
         System.assertEquals(System.URL.getOrgDomainUrl().toExternalForm().contains('sandbox') == isSandbox);
         
@@ -18,7 +18,7 @@ public with sharing class SObjectHelperTest {
         
         Test.startTest();
         
-        String objectApiName = SObjectHelper.getSObjectApiNameById(UserInfo.getUserId());
+        String objectApiName = SObjectUtil.getSObjectApiNameById(UserInfo.getUserId());
         
         System.assertEquals('User', objectApiName);
         
@@ -31,7 +31,7 @@ public with sharing class SObjectHelperTest {
         Test.startTest();
         
         try {
-            Id result = SObjectHelper.getRecordTypeIdByName('Account', 'Test');
+            Id result = SObjectUtil.getRecordTypeIdByName('Account', 'Test');
             
         } catch(Exception ex) {
             System.assert(String.isNotBlank(ex.getMessage()));
@@ -45,7 +45,7 @@ public with sharing class SObjectHelperTest {
         
         Test.startTest();
         
-        List<SObjectHelper.PicklistValueWapper> result = SObjectHelper.getPicklistValues('Account', 'Type');
+        List<SObjectUtil.PicklistValueWapper> result = SObjectUtil.getPicklistValues('Account', 'Type');
         
         System.assert(!result.isEmpty());
         
@@ -57,7 +57,7 @@ public with sharing class SObjectHelperTest {
         
         Test.startTest();
         
-        SObject result = SObjectHelper.getSobjectDetailsById(UserInfo.getUserId());
+        SObject result = SObjectUtil.getSobjectDetailsById(UserInfo.getUserId());
         
         Test.stopTest();
         
@@ -69,7 +69,7 @@ public with sharing class SObjectHelperTest {
         
         Test.startTest();
         
-        List<SObject> result = SObjectHelper.getSobjectDetailsByIds(new Set<Id>{UserInfo.getUserId()});
+        List<SObject> result = SObjectUtil.getSobjectDetailsByIds(new Set<Id>{UserInfo.getUserId()});
         
         Test.stopTest();
         

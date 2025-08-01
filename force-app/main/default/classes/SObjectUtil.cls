@@ -1,4 +1,4 @@
-public without sharing class SObjectHelper {
+public without sharing class SObjectUtil {
 
     @AuraEnabled
     public static Boolean isSandbox() {
