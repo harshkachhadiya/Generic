@@ -8,7 +8,7 @@ public with sharing class SObjectUtilTest {
         
         Boolean isSandbox = SObjectUtil.isSandbox();
         
-        System.assertEquals(System.URL.getOrgDomainUrl().toExternalForm().contains('sandbox') == isSandbox);
+        System.assertEquals(isSandbox, System.URL.getOrgDomainUrl().toExternalForm().contains('sandbox'));
         
         Test.stopTest();
     }
