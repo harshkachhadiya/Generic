@@ -1,13 +1,13 @@
 @IsTest
-public with sharing class GenericExceptionTest {
+public with sharing class ApplicationExceptionTest {
     
     @IsTest
-    static void genericExceptionTest() {
+    static void applicationExceptionTest() {
 
         Test.startTest();
 
         try {
-            GenericException.genericExceptionTest();
+            ApplicationException.applicationExceptionTest();
 
         } catch(Exception ex) {
             System.assert(String.isNotBlank(ex.getMessage())); 

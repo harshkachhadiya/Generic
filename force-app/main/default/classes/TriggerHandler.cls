@@ -1,6 +1,6 @@
 public with sharing virtual class TriggerHandler {
     
-    Boolean bypass = false;
+    private Boolean bypass = false;
     
     public TriggerHandler() {
         
@@ -11,6 +11,7 @@ public with sharing virtual class TriggerHandler {
     }
     
     public void run() {
+        
         if(bypass || Trigger.isBefore && Trigger.isInsert) {
             this.beforeInsert();
         } 

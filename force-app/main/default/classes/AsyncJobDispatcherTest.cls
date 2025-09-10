@@ -1,5 +1,5 @@
 @IsTest
-public with sharing class QueueableHelperTest {
+public with sharing class AsyncJobDispatcherTest {
     
     @IsTest
     static void callTest() {
@@ -8,7 +8,7 @@ public with sharing class QueueableHelperTest {
 
         Map<String, Object> arguments = new Map<String, Object>();
         arguments.put('arg1', 'arg1Value');
-        System.enqueueJob(new QueueableUtility('ClassName.methodName', arguments));
+        System.enqueueJob(new AsyncJobExecutor('ClassName.methodName', arguments));
         
         Test.stopTest();
     }

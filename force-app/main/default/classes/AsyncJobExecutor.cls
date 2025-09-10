@@ -1,9 +1,9 @@
-public without sharing class QueueableUtility implements Queueable, Database.AllowsCallouts {
+public without sharing class AsyncJobExecutor implements Queueable, Database.AllowsCallouts {
     
     public String identifier;
     public Map<String, Object> arguments = new Map<String, Object>();
     
-    public QueueableUtility(String identifier, Map<String, Object> arguments) {
+    public AsyncJobExecutor(String identifier, Map<String, Object> arguments) {
         this.identifier = identifier;
         
         if(arguments != null) {
@@ -12,7 +12,7 @@ public without sharing class QueueableUtility implements Queueable, Database.All
     }
     
     public void execute(QueueableContext context) {
-        Callable helperClass = (Callable) Type.forName('QueueableHelper').newInstance();
+        Callable helperClass = (Callable) Type.forName('AsyncJobDispatcher').newInstance();
         helperClass.call(identifier, arguments);
     }
 }
@@ -22,6 +22,6 @@ public without sharing class QueueableUtility implements Queueable, Database.All
 =========================================================================
 Map<String, Object> arguments = new Map<String, Object>();
 arguments.put('arg1', arg1Value);
-System.enqueueJob(new QueueableUtility('ClassName.methodName', arguments));
+System.enqueueJob(new AsyncJobExecutor('ClassName.methodName', arguments));
 =========================================================================
 */

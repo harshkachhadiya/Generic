@@ -32,7 +32,7 @@ public without sharing class SObjectUtil {
     }
     
     @AuraEnabled
-    public static List<PicklistValueWapper> getPicklistValues(String sObjectApiName, String fieldApiName) {
+    public static List<PicklistValueWrapper> getPicklistValues(String sObjectApiName, String fieldApiName) {
         
         Map<String, String> picklistValues = new Map<String, String>();
         
@@ -43,12 +43,12 @@ public without sharing class SObjectUtil {
         return preparePicklistValues(picklistValues, null);
     }
     
-    public static List<PicklistValueWapper> preparePicklistValues(Map<String, String> picklistValues, Set<String> selectedValues) {
+    public static List<PicklistValueWrapper> preparePicklistValues(Map<String, String> picklistValues, Set<String> selectedValues) {
         
-        List<PicklistValueWapper> result = new List<PicklistValueWapper>();
+        List<PicklistValueWrapper> result = new List<PicklistValueWrapper>();
         
         for(String value : picklistValues.keySet()) {
-            result.add(new PicklistValueWapper(picklistValues.get(value), value, selectedValues != null && selectedValues.contains(value)));
+            result.add(new PicklistValueWrapper(picklistValues.get(value), value, selectedValues != null && selectedValues.contains(value)));
         }
         
         return result;
@@ -92,7 +92,7 @@ public without sharing class SObjectUtil {
     @AuraEnabled
     public static SObject getSObjectDetailsById(Id recordId, String extraFields) {
         
-        return Database.query(prepareSObjectQueryString(getSObjectApiNameById(recordId), extraFields) + ' WHERE Id = :recordId');
+        return Database.query(String.escapeSingleQuotes(prepareSObjectQueryString(getSObjectApiNameById(recordId), extraFields) + ' WHERE Id = :recordId'));
     }
     
     public static SObject getSObjectDetailsById(Id recordId) {
@@ -102,7 +102,7 @@ public without sharing class SObjectUtil {
     
     public static List<SObject> getSObjectDetailsByIds(Set<Id> recordIds, String extraFields) {
         
-        return Database.query(prepareSObjectQueryString(getSObjectApiNameById(new List<Id>(recordIds)[0]), extraFields) + ' WHERE Id IN :recordIds');
+        return Database.query(String.escapeSingleQuotes(prepareSObjectQueryString(getSObjectApiNameById(new List<Id>(recordIds)[0]), extraFields) + ' WHERE Id IN :recordIds'));
     }
     
     public static List<SObject> getSObjectDetailsByIds(Set<Id> recordIds) {
@@ -120,12 +120,12 @@ public without sharing class SObjectUtil {
         upsert record;
     }
     
-    public class PicklistValueWapper {
+    public class PicklistValueWrapper {
         @AuraEnabled public String label {get; set;}
         @AuraEnabled public String value {get; set;}
         @AuraEnabled public Boolean isSelected {get; set;}
         
-        public PicklistValueWapper(String label, String value, Boolean isSelected) {
+        public PicklistValueWrapper(String label, String value, Boolean isSelected) {
             this.label = label;
             this.value = value;
             this.isSelected = isSelected;

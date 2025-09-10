@@ -7,11 +7,22 @@ public with sharing class ErrorLogsNotificationScheduleTest {
         Log__c log = new Log__c();
         insert log;
         
-        LogEntry__c logEntry = new LogEntry__c();
-        logEntry.Log__c = log.Id;
-        logEntry.OriginType__c = 'Apex';
-        logEntry.LoggingLevel__c = 'ERROR';
-        insert logEntry;
+        LogEntry__c apexLogEntry = new LogEntry__c();
+        apexLogEntry.Log__c = log.Id;
+        apexLogEntry.OriginType__c = 'Apex';
+        apexLogEntry.LoggingLevel__c = 'ERROR';
+        insert apexLogEntry;
+        
+        LogEntry__c flowLogEntry = new LogEntry__c();
+        flowLogEntry.Log__c = log.Id;
+        flowLogEntry.OriginType__c = 'Flow';
+        flowLogEntry.LoggingLevel__c = 'ERROR';
+        insert flowLogEntry;
+        
+        DateTime yesterdayDateTime = DateTime.now().addDays(-1);
+        
+        Test.setCreatedDate(apexLogEntry.Id, yesterdayDateTime);
+        Test.setCreatedDate(flowLogEntry.Id, yesterdayDateTime);
         
         Test.startTest();
         

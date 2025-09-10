@@ -9,32 +9,23 @@ public with sharing class ErrorLogsNotificationSchedule implements Schedulable {
         
         String errorsDetails = '';
         
-        List<AggregateResult> aResults = new List<AggregateResult>();
-        
-        if(Test.isRunningTest()) {
-            aResults = [SELECT ApexClassName__c, COUNT(Id) cnt
-                        FROM LogEntry__c
-                        WHERE OriginType__c = 'Apex'
-                        AND LoggingLevel__c = 'ERROR'
-                        GROUP BY ApexClassName__c];
-            
-        } else {
-            aResults = [SELECT ApexClassName__c, COUNT(Id) cnt
-                        FROM LogEntry__c
-                        WHERE OriginType__c = 'Apex'
-                        AND LoggingLevel__c = 'ERROR'
-                        AND CreatedDate = YESTERDAY
-                        GROUP BY ApexClassName__c];
-        }
+        List<AggregateResult> aResults = [SELECT ApexClassName__c, COUNT(Id) cnt
+                                          FROM LogEntry__c
+                                          WHERE CreatedDate = YESTERDAY
+                                          AND OriginType__c = 'Apex'
+                                          AND LoggingLevel__c = 'ERROR'
+                                          GROUP BY ApexClassName__c];
         
         if(!aResults.isEmpty()) {
             
             errorsDetails += '<h2>Apex Errors</h2><table>'
-                + '<tr><th width="60%">Class Name</th><th width="40%">Numbe Of Errors</th></tr>';
+                + '<tr><th width="60%">Class Name</th><th width="40%">Number Of Errors</th></tr>';
             
             for(AggregateResult aResult : aResults) {
                 errorsDetails += '<tr><td>' 
-                    + (aResult.get('ApexClassName__c') != null ? aResult.get('ApexClassName__c') : '--EMPTY--') 
+                    + (aResult.get('ApexClassName__c') != null 
+                       ? aResult.get('ApexClassName__c') 
+                       : '--EMPTY--') 
                     + '</td><td>' 
                     + aResult.get('cnt') 
                     + '</td></tr>';
@@ -47,32 +38,23 @@ public with sharing class ErrorLogsNotificationSchedule implements Schedulable {
             errorsDetails += '</br>';
         }
         
-        aResults = new List<AggregateResult>();
-        
-        if(Test.isRunningTest()) {
-            aResults = [SELECT OriginLocation__c, COUNT(Id) cnt
-                        FROM LogEntry__c
-                        WHERE OriginType__c = 'Flow'
-                        AND LoggingLevel__c = 'ERROR'
-                        GROUP BY OriginLocation__c];
-            
-        } else {
-            aResults = [SELECT OriginLocation__c, COUNT(Id) cnt
-                        FROM LogEntry__c
-                        WHERE OriginType__c = 'Flow'
-                        AND LoggingLevel__c = 'ERROR'
-                        AND CreatedDate = YESTERDAY
-                        GROUP BY OriginLocation__c];
-        }
+        aResults = [SELECT OriginLocation__c, COUNT(Id) cnt
+                    FROM LogEntry__c
+                    WHERE CreatedDate = YESTERDAY
+                    AND OriginType__c = 'Flow'
+                    AND LoggingLevel__c = 'ERROR'
+                    GROUP BY OriginLocation__c];
         
         if(!aResults.isEmpty()) {
             
             errorsDetails += '<h2>Flow Errors</h2><table>'
-                + '<tr><th width="60%">Location</th><th width="40%">Numbe Of Errors</th></tr>';
+                + '<tr><th width="60%">Location</th><th width="40%">Number Of Errors</th></tr>';
             
             for(AggregateResult aResult : aResults) {
                 errorsDetails += '<tr><td>' 
-                    + (aResult.get('OriginLocation__c') != null ? aResult.get('OriginLocation__c') : '--EMPTY--') 
+                    + (aResult.get('OriginLocation__c') != null 
+                       ? aResult.get('OriginLocation__c') 
+                       : '--EMPTY--') 
                     + '</td><td>' 
                     + aResult.get('cnt') 
                     + '</td></tr>';
@@ -94,6 +76,7 @@ public with sharing class ErrorLogsNotificationSchedule implements Schedulable {
             : 'PRODUCTION';
         
         Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
+        email.setToAddresses(Label.ErrorLogsNotification_Emails.split(','));
         email.setSubject(emailTemp.Subject
                          .replace('DATE', Date.today().addDays(-1).format())
                          .replace('ORGNAME', orgName));
@@ -101,7 +84,6 @@ public with sharing class ErrorLogsNotificationSchedule implements Schedulable {
                           .replace('ORGNAME', orgName)
                           .replace('ORGID', org.Id)
                           .replace('ERRORSDETAILS', errorsDetails));
-        email.setToAddresses(Label.ErrorLogsNotification_Emails.split(','));
         email.setSaveAsActivity(false);
         
         Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{email}, false);

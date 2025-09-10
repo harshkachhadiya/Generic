@@ -1,4 +1,4 @@
-public without sharing class QueueableHelper implements Callable {
+public without sharing class AsyncJobDispatcher implements Callable {
     
     public Object call(String identifier, Map<String, Object> arguments) {
         
@@ -8,6 +8,9 @@ public without sharing class QueueableHelper implements Callable {
                 /* ClassName.methodName(
                     (List<String>) arguments.get('arg1')
                 ); */
+            }
+            when else {
+                throw new ApplicationException('Unknown identifier: ' + identifier);
             }
         }
         

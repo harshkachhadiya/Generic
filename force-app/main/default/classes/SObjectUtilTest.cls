@@ -45,7 +45,7 @@ public with sharing class SObjectUtilTest {
         
         Test.startTest();
         
-        List<SObjectUtil.PicklistValueWapper> result = SObjectUtil.getPicklistValues('Account', 'Type');
+        List<SObjectUtil.PicklistValueWrapper> result = SObjectUtil.getPicklistValues('Account', 'Type');
         
         System.assert(!result.isEmpty());
         

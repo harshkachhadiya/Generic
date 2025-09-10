@@ -1,5 +1,5 @@
 @IsTest
-public with sharing class TestMockCallouts implements HttpCalloutMock {
+public with sharing class HttpCalloutMockUtility implements HttpCalloutMock {
     
     private List<ResponseMock> callouts = new List<ResponseMock>();
     
