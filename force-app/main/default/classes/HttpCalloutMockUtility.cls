@@ -28,14 +28,14 @@ public with sharing class HttpCalloutMockUtility implements HttpCalloutMock {
         
         String requestEndpoint = request.getEndpoint();
         
-        HttpResponse response = new HttpResponse();
-        
         for(ResponseMock callout : callouts) {
             
             if((callout.endpointStartsWithEnabled
                 && requestEndpoint.startsWith(callout.endpoint))
                || requestEndpoint == callout.endpoint) 
             {
+                HttpResponse response = new HttpResponse();
+
                 response.setStatusCode(callout.statusCode);
                 response.setBody(callout.body);
                 
