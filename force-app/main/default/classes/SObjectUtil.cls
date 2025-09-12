@@ -1,12 +1,14 @@
 public without sharing class SObjectUtil {
-
+    
     @AuraEnabled
     public static Boolean isSandbox() {
+        
         return System.URL.getOrgDomainUrl().toExternalForm().contains('sandbox');
     }
     
     @AuraEnabled
     public static String getSObjectApiNameById(Id recordId) {
+        
         return recordId.getSObjectType().getDescribe().getName();
     }
     
@@ -32,7 +34,7 @@ public without sharing class SObjectUtil {
     }
     
     @AuraEnabled
-    public static List<PicklistValueWrapper> getPicklistValues(String sObjectApiName, String fieldApiName) {
+    public static List<PicklistOption> getPicklistValues(String sObjectApiName, String fieldApiName) {
         
         Map<String, String> picklistValues = new Map<String, String>();
         
@@ -43,12 +45,12 @@ public without sharing class SObjectUtil {
         return preparePicklistValues(picklistValues, null);
     }
     
-    public static List<PicklistValueWrapper> preparePicklistValues(Map<String, String> picklistValues, Set<String> selectedValues) {
+    public static List<PicklistOption> preparePicklistValues(Map<String, String> picklistValues, Set<String> selectedValues) {
         
-        List<PicklistValueWrapper> result = new List<PicklistValueWrapper>();
+        List<PicklistOption> result = new List<PicklistOption>();
         
         for(String value : picklistValues.keySet()) {
-            result.add(new PicklistValueWrapper(picklistValues.get(value), value, selectedValues != null && selectedValues.contains(value)));
+            result.add(new PicklistOption(picklistValues.get(value), value, selectedValues != null && selectedValues.contains(value)));
         }
         
         return result;
@@ -71,12 +73,12 @@ public without sharing class SObjectUtil {
         return fields;
     }
     
-    public static String prepareSObjectQueryString(String sObjectApiName, String extraFields) {
+    public static String prepareSObjectQueryString(String sObjectApiName, List<String> additionalFields) {
         
         String queryString = 'SELECT ' + String.join(new List<String>(getSObjectAllFields(sObjectApiName)), ', ');
         
-        if(String.isNotBlank(extraFields)) {
-            queryString += ', ' + extraFields; 
+        if(additionalFields != null && !additionalFields.isEmpty()) {
+            queryString += ', ' + String.join(additionalFields, ', ');
         }
         
         queryString += ' FROM ' + sObjectApiName;
@@ -90,9 +92,9 @@ public without sharing class SObjectUtil {
     }
     
     @AuraEnabled
-    public static SObject getSObjectDetailsById(Id recordId, String extraFields) {
+    public static SObject getSObjectDetailsById(Id recordId, List<String> additionalFields) {
         
-        return Database.query(String.escapeSingleQuotes(prepareSObjectQueryString(getSObjectApiNameById(recordId), extraFields) + ' WHERE Id = :recordId'));
+        return Database.query(String.escapeSingleQuotes(prepareSObjectQueryString(getSObjectApiNameById(recordId), additionalFields) + ' WHERE Id = :recordId'));
     }
     
     public static SObject getSObjectDetailsById(Id recordId) {
@@ -100,12 +102,12 @@ public without sharing class SObjectUtil {
         return getSObjectDetailsById(recordId, null);
     }
     
-    public static List<SObject> getSObjectDetailsByIds(Set<Id> recordIds, String extraFields) {
+    public static List<SObject> getSObjectDetailsByIds(List<Id> recordIds, List<String> additionalFields) {
         
-        return Database.query(String.escapeSingleQuotes(prepareSObjectQueryString(getSObjectApiNameById(new List<Id>(recordIds)[0]), extraFields) + ' WHERE Id IN :recordIds'));
+        return Database.query(String.escapeSingleQuotes(prepareSObjectQueryString(getSObjectApiNameById(recordIds[0]), additionalFields) + ' WHERE Id IN :recordIds'));
     }
     
-    public static List<SObject> getSObjectDetailsByIds(Set<Id> recordIds) {
+    public static List<SObject> getSObjectDetailsByIds(List<Id> recordIds) {
         
         return getSObjectDetailsByIds(recordIds, null);
     }
@@ -114,18 +116,18 @@ public without sharing class SObjectUtil {
     public static void updateSObject(SObject record) {
         update record;
     }
-
+    
     @AuraEnabled
     public static void upsertSObject(SObject record) {
         upsert record;
     }
     
-    public class PicklistValueWrapper {
+    public class PicklistOption {
         @AuraEnabled public String label {get; set;}
         @AuraEnabled public String value {get; set;}
         @AuraEnabled public Boolean isSelected {get; set;}
         
-        public PicklistValueWrapper(String label, String value, Boolean isSelected) {
+        public PicklistOption(String label, String value, Boolean isSelected) {
             this.label = label;
             this.value = value;
             this.isSelected = isSelected;

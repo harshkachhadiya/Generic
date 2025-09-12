@@ -1,6 +1,6 @@
 @IsTest
 public with sharing class SObjectUtilTest {
-
+    
     @IsTest
     static void isSandboxTest() {
         
@@ -45,7 +45,7 @@ public with sharing class SObjectUtilTest {
         
         Test.startTest();
         
-        List<SObjectUtil.PicklistValueWrapper> result = SObjectUtil.getPicklistValues('Account', 'Type');
+        List<SObjectUtil.PicklistOption> result = SObjectUtil.getPicklistValues('Account', 'Type');
         
         System.assert(!result.isEmpty());
         
@@ -53,11 +53,11 @@ public with sharing class SObjectUtilTest {
     }
     
     @IsTest
-    static void getSobjectDetailsByIdTest() {
+    static void getSObjectDetailsByIdTest() {
         
         Test.startTest();
         
-        SObject result = SObjectUtil.getSobjectDetailsById(UserInfo.getUserId());
+        SObject result = SObjectUtil.getSObjectDetailsById(UserInfo.getUserId());
         
         Test.stopTest();
         
@@ -65,11 +65,11 @@ public with sharing class SObjectUtilTest {
     }
     
     @IsTest
-    static void getSobjectDetailsByIdsTest() {
+    static void getSObjectDetailsByIdsTest() {
         
         Test.startTest();
         
-        List<SObject> result = SObjectUtil.getSobjectDetailsByIds(new Set<Id>{UserInfo.getUserId()});
+        List<SObject> result = SObjectUtil.getSObjectDetailsByIds(new List<Id>{ UserInfo.getUserId() });
         
         Test.stopTest();
         
