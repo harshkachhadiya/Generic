@@ -32,6 +32,27 @@ public without sharing class SObjectUtil {
         
         return null;
     }
+
+    public static String getRecordTypeNameById(String sObjectApiName, Id recordTypeId) {
+        
+        if(String.isBlank(sObjectApiName) 
+           || String.isBlank(recordTypeId)) 
+        {
+            throw new IllegalArgumentException('Object Name and Record Type Id must not be empty.');
+        }
+        
+        Schema.SObjectType sObjectType = Schema.getGlobalDescribe().get(sObjectApiName);
+        
+        if(sObjectType == null) {
+            throw new IllegalArgumentException('Object not found: ' + sObjectApiName);
+        }
+        
+        Schema.RecordTypeInfo recordTypeInfo = sObjectType.getDescribe().getRecordTypeInfosById().get(recordTypeId);
+        
+        return recordTypeInfo != null 
+            ? recordTypeInfo.getName() 
+            : null;
+    }
     
     @AuraEnabled
     public static List<PicklistOption> getPicklistValues(String sObjectApiName, String fieldApiName) {
