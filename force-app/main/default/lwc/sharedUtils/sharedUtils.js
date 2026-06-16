@@ -105,17 +105,21 @@ const reduceErrors = (errors) => {
 
 // Meant to concatenate a message with reduced errors / seperator value 
 const joinErrors = (reducedErrors, seperator) => {
+
     if (!seperator) {
         seperator = ', ';
     }
+
     if (Array.isArray(reducedErrors)) {
         reducedErrors = reducedErrors.join(seperator);
     }
+
     return reducedErrors;
 }
 
 // Dispatch Toast Event
 const dispatchToastEvent = (title, message, variant, mode = 'dismissable', messageData = []) => {
+
     dispatchEvent(
         new ShowToastEvent({
             title: title,
@@ -128,14 +132,17 @@ const dispatchToastEvent = (title, message, variant, mode = 'dismissable', messa
 }
 
 const dispatchToastError = (error) => {
+
     dispatchToastEvent('Error', joinErrors(reduceErrors(error)), 'error');
 }
 
 const dispatchToastGeneralError = (error) => {
+
     dispatchToastEvent('Error', 'There has been an issue; please consult your System Administrator', 'error');
 }
 
 const copyToClipboard = (text) => {
+
     navigator.clipboard.writeText(text)
         .then(() => {
             dispatchToastEvent('Success', 'Details copied successfully.', 'success');
@@ -146,18 +153,21 @@ const copyToClipboard = (text) => {
 }
 
 const formatString = (value) => {
+
     return value
         ? value
         : '';
 }
 
 const formatNumber = (value, decimalPlaces = 2) => {
+
     return value
         ? Math.round((parseFloat(value) + Number.EPSILON) * Math.pow(10, decimalPlaces)) / Math.pow(10, decimalPlaces)
         : 0;
 }
 
 const formatCurrency = (value) => {
+
     return new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -165,6 +175,7 @@ const formatCurrency = (value) => {
 }
 
 const formatDateToDDMMYYYY = (date) => {
+
     if (date) {
         date = new Date(date);
 
@@ -175,6 +186,7 @@ const formatDateToDDMMYYYY = (date) => {
 }
 
 const formatDateToMMDDYYYY = (date) => {
+
     if (date) {
         date = new Date(date);
 
@@ -185,10 +197,12 @@ const formatDateToMMDDYYYY = (date) => {
 }
 
 const formatDateToYYYYMMDD = (date) => {
+
     return (new Date(date)).toISOString().slice(0, 10);
 }
 
 const dateAddDays = (date, noOfDays = 0) => {
+
     if (date) {
         date = new Date(date);
 
@@ -199,6 +213,7 @@ const dateAddDays = (date, noOfDays = 0) => {
 }
 
 const dateAddMonths = (date, noOfMonths = 0) => {
+    
     if (date) {
         date = new Date(date);
 
