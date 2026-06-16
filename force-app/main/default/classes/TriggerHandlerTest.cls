@@ -1,5 +1,5 @@
 @IsTest
-public with sharing class TriggerHandlerTest {
+private with sharing class TriggerHandlerTest {
     
     @IsTest
     static void runTest() {
