@@ -6,6 +6,7 @@ private with sharing class TriggerHandlerTest {
         
         Test.startTest();
         
+        
         TriggerHandler handler = new TriggerHandler(true);
         
         handler.run();
