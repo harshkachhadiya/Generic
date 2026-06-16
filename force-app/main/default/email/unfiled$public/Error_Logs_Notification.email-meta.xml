@@ -2,20 +2,21 @@
 <EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
     <available>true</available>
     <description>Error Logs Notification</description>
-    <encodingKey>UTF-8</encodingKey>
+    <encodingKey>ISO-8859-1</encodingKey>
     <name>Error Logs Notification</name>
     <style>none</style>
-    <subject>Error Logs Notification - DATE - (Org Name: ORGNAME)</subject>
-    <textOnly>Hey,
+    <subject>Error Logs Notification - (Org Name: {ORGNAME}) - (Date: {DATE})</subject>
+    <textOnly>Hi Team,,
 
-We are reaching out to inform you that errors have been detected in the Apex code and/or Flow processes within your Salesforce environment. Below, you will find the relevant details about the encountered issues:
+Automated monitoring has detected one or more errors in Apex code and/or Flow processes in the following Salesforce environment:
 
-Org Name: ORGNAME
-Org Id: ORGID
+Org Name: {ORGNAME}
+Org Id: {ORGID}
+Org Id: {DATE}
 
-ERRORSDETAILS
+{ERRORSDETAILS}
 
-Thanks.</textOnly>
+Thanks</textOnly>
     <type>custom</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>

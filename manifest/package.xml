@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>ApplicationException</members>
-        <members>ApplicationExceptionTest</members>
+        <members>ApexUtils</members>
+        <members>ApexUtilsTest</members>
         <members>AsyncJobDispatcher</members>
         <members>AsyncJobDispatcherTest</members>
         <members>AsyncJobExecutor</members>
         <members>ErrorLogsNotificationSchedule</members>
         <members>ErrorLogsNotificationScheduleTest</members>
         <members>HttpCalloutMockUtility</members>
-        <members>SObjectUtil</members>
-        <members>SObjectUtilTest</members>
+        <members>SObjectSchemaUtils</members>
+        <members>SObjectSchemaUtilsTest</members>
+        <members>OrgException</members>
+        <members>OrgExceptionTest</members>
         <members>TriggerHandler</members>
         <members>TriggerHandlerTest</members>
         <name>ApexClass</name>

@@ -10,7 +10,7 @@ public without sharing class AsyncJobDispatcher implements Callable {
                 ); */
             }
             when else {
-                throw new ApplicationException('Unknown identifier: ' + identifier);
+                throw new OrgException('Unknown identifier: ' + identifier);
             }
         }
         

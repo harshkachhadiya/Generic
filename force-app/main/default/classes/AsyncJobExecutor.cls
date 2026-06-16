@@ -6,7 +6,7 @@ public without sharing class AsyncJobExecutor implements Queueable, Database.All
     public AsyncJobExecutor(String identifier, Map<String, Object> arguments) {
         this.identifier = identifier;
         
-        if(arguments != null) {
+        if (arguments != null) {
             this.arguments = arguments;
         }
     }

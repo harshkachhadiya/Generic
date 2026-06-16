@@ -19,21 +19,23 @@
    </head>
    <body>
       <p> 
-         Hey,
+         Hi Team,
       </p>
       <p>
-         We are reaching out to inform you that errors have been detected in the Apex code and/or Flow processes within your Salesforce environment. Below, you will find the relevant details about the encountered issues:
+         Automated monitoring has detected one or more errors in Apex code and/or Flow processes in the following Salesforce environment:
       </p>
       <p> 
-         <b>Org Name:</b> ORGNAME
+         <b>Org Name:</b> {ORGNAME}
          <br/>
-         <b>Org Id:</b> ORGID
+         <b>Org Id:</b> {ORGID}
+         <br/>
+         <b>Date:</b> {DATE}
       </p>
-      ERRORSDETAILS
+      {ERRORSDETAILS}
       <br/>
       <br/>
       <p> 
-         Thanks.
+         Thanks
       </p>
    </body>
 </html>

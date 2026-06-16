@@ -12,31 +12,31 @@ public with sharing virtual class TriggerHandler {
     
     public void run() {
         
-        if(bypass || Trigger.isBefore && Trigger.isInsert) {
+        if (bypass || (Trigger.isBefore && Trigger.isInsert)) {
             this.beforeInsert();
         } 
         
-        if(bypass || (Trigger.isBefore && Trigger.isUpdate)) {
+        if (bypass || (Trigger.isBefore && Trigger.isUpdate)) {
             this.beforeUpdate();
         } 
         
-        if(bypass || (Trigger.isBefore && Trigger.isDelete)) {
+        if (bypass || (Trigger.isBefore && Trigger.isDelete)) {
             this.beforeDelete();
         }
         
-        if(bypass || (Trigger.isAfter && Trigger.isInsert)) {
+        if (bypass || (Trigger.isAfter && Trigger.isInsert)) {
             this.afterInsert();
         }
         
-        if(bypass || (Trigger.isAfter && Trigger.isUpdate)) {
+        if (bypass || (Trigger.isAfter && Trigger.isUpdate)) {
             this.afterUpdate();
         }
         
-        if(bypass || (Trigger.isAfter && Trigger.isDelete)) {
+        if (bypass || (Trigger.isAfter && Trigger.isDelete)) {
             this.afterDelete();
         } 
         
-        if(bypass || (Trigger.isAfter && Trigger.isUndelete)) {
+        if (bypass || (Trigger.isAfter && Trigger.isUndelete)) {
             this.afterUndelete();
         }
     }

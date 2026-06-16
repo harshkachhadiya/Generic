@@ -45,36 +45,46 @@ const reduceErrors = (errors) => {
 
                 // UI API read errors
                 if (error.body) {
-                    if (error.body.duplicateResults && error.body.duplicateResults.length) {
+                    if (error.body.duplicateResults
+                        && error.body.duplicateResults.length) {
                         return error.body.duplicateResults.map((err) => err.message);
                     }
-                    else if (error.body.fieldErrors && Array.isArray(error.body.fieldErrors) && error.body.fieldErrors.length) {
+                    else if (error.body.fieldErrors
+                        && Array.isArray(error.body.fieldErrors)
+                        && error.body.fieldErrors.length) {
                         return error.body.fieldErrors.map((err) => err.message);
                     }
-                    else if (error.body.fieldErrors && Object.keys(error.body.fieldErrors).length) {
+                    else if (error.body.fieldErrors
+                        && Object.keys(error.body.fieldErrors).length) {
                         return Object.entries(error.body.fieldErrors).flatMap(([field, errs]) => errs.map((err) => field + ': ' + err.message));
                     }
-                    else if (error.body.pageErrors && Array.isArray(error.body.pageErrors) && error.body.pageErrors.length) {
+                    else if (error.body.pageErrors
+                        && Array.isArray(error.body.pageErrors)
+                        && error.body.pageErrors.length) {
                         return error.body.pageErrors.map((err) => err.message);
                     }
                     else if (Array.isArray(error.body)) {
                         return error.body.map((err) => err.message);
                     }
                     // UI API DML, Apex and network errors
-                    else if (error.body && typeof error.body.message === 'string') {
+                    else if (error.body
+                        && typeof error.body.message === 'string') {
                         return error.body.message;
                     }
                 }
                 else if (error.detail) {
-                    if (error.detail.output.fieldErrors && Object.keys(error.detail.output.fieldErrors).length) {
+                    if (error.detail.output.fieldErrors
+                        && Object.keys(error.detail.output.fieldErrors).length) {
                         return Object.entries(error.detail.output.fieldErrors).map(([key, value]) => {
                             return value.map((err) => err.message);
                         });
                     }
-                    else if (error.detail.detail && typeof error.detail.detail === 'string') {
+                    else if (error.detail.detail
+                        && typeof error.detail.detail === 'string') {
                         return error.detail.detail;
                     }
-                    else if (error.detail.message && typeof error.detail.message === 'string') {
+                    else if (error.detail.message
+                        && typeof error.detail.message === 'string') {
                         return error.detail.message;
                     }
                 }
@@ -136,7 +146,9 @@ const copyToClipboard = (text) => {
 }
 
 const formatString = (value) => {
-    return value ? value : '';
+    return value
+        ? value
+        : '';
 }
 
 const formatNumber = (value, decimalPlaces = 2) => {
@@ -207,7 +219,9 @@ const downloadExcelWithSheets = (tabs = [], filename = 'export.xlsx') => {
     tabs.forEach(tab => {
         const { sheetName, headers, records } = tab;
 
-        if (!sheetName || !headers?.length || !records?.length) {
+        if (!sheetName
+            || !headers?.length
+            || !records?.length) {
             return;
         }
 
